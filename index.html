@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Pokedex</h1>
+    </div>
+
+    <div class="container">
+        <div class="search-section">
+            <h2>Search Pokemon by Name or ID:</h2>
+            <input type="text" placeholder="Search..." class="findPoke">
+        </div>
+
+    
+
+        <div class="type-selection">
+            <h2>Select Pokemon Type</h2>
+            <div class="type-icons">
+                <img src="img/flames.png" alt="Fire Type" class="fire">
+                <img src="img/drop.png" alt="Water Type" class="water">
+                <img src="img/danger.png" alt="Electric Type" class="electric">
+                <img src="img/grass.png" alt="Grass Type" class="grass">
+            </div>
+        </div>
+    </div>
+    <div class="pokedex-list">
+        <!-- Ovaj deo će biti popunjen Pokémonima kroz JavaScript -->
+    </div>
+
+
+    <div id="pokemon-overlay" class="overlay hidden">
+        <div class="overlay-content">
+            <span id="close-overlay" class="close-btn">&times;</span>
+            <h2 id="pokemon-name"></h2>
+            <p id="pokemon-id"></p>
+            <img id="pokemon-image" alt="Pokemon Image">
+        </div>
+    </div>
+    
+
+    <script src="main.js"></script>
+</body>
+</html>
+
