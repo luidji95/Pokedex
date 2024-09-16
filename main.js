@@ -1,6 +1,9 @@
 import './style.css'
 
 
+
+
+
 'use strict';
 
 const container = document.querySelector('.container'); 
@@ -33,3 +36,38 @@ class PokemonManager {
 
  
 }
+
+const pokemonManager = new PokemonManager();
+
+async function fetchData(url) {
+    try {
+        let response = await fetch(url);
+        let data = await response.json(); 
+        let pokemons = data.pokemon || []; 
+
+        pokemonManager.resetPokemons();
+
+        pokemons.forEach((entry, index) => {
+            
+            let pokemonName = entry.pokemon.name;
+            pokemonManager.addPokemon(pokemonName, index);
+        });
+
+        pokemonManager.renderPokemons();
+
+    } catch (error) {
+        console.log('Greška:', error);
+    }
+}
+
+container.addEventListener('click', function(ev) {
+    if (ev.target.classList.contains('fire')) { 
+        fetchData('https://pokeapi.co/api/v2/type/fire'); 
+    } else if (ev.target.classList.contains('water')) {
+        fetchData('https://pokeapi.co/api/v2/type/water'); 
+    } else if (ev.target.classList.contains('electric')){
+        fetchData('https://pokeapi.co/api/v2/type/electric');
+    } else if (ev.target.classList.contains('grass')){
+        fetchData('https://pokeapi.co/api/v2/type/grass');
+    } 
+});
