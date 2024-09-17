@@ -1,6 +1,3 @@
-import './style.css'
-
-
 
 
 
@@ -71,3 +68,71 @@ container.addEventListener('click', function(ev) {
         fetchData('https://pokeapi.co/api/v2/type/grass');
     } 
 });
+
+
+
+findPokeInput.addEventListener('keyup', async function(event) {
+    if (event.key === 'Enter') {
+        let inputValue = findPokeInput.value.toLowerCase();
+        console.log(inputValue);
+
+        try {
+            
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${inputValue}`);
+            
+            if (response) {
+                
+                const { id, name, sprites } = await response.json();
+                const imageUrl = sprites.front_default; 
+                
+                const overlay = document.getElementById('pokemon-overlay');
+                const pokemonNameElem = document.getElementById('pokemon-name');
+                const pokemonIdElem = document.getElementById('pokemon-id');
+                const pokemonImageElem = document.getElementById('pokemon-image');
+
+                pokemonNameElem.textContent = `Name: ${name}`;
+                pokemonIdElem.textContent = `ID: ${id}`;
+                pokemonImageElem.src = imageUrl;
+
+                
+                overlay.classList.remove('hidden');
+                
+            } else {
+                pokedexList.innerHTML = 'Pokémon ne postoji u bazi.';
+            }
+
+        } catch (error) {
+            console.log('Greška:', error);
+            pokedexList.innerHTML = 'Došlo je do greške. Pokušajte ponovo.';
+        }
+    }
+});
+
+
+document.getElementById('close-overlay').addEventListener('click', function() {
+    document.getElementById('pokemon-overlay').classList.add('hidden');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
